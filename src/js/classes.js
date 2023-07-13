@@ -8,8 +8,16 @@ export class Todo {
     return this.category;
   }
 
+  getTaskCount() {
+    return this.tasks.length;
+  }
+
   getTasks() {
     return this.tasks;
+  }
+
+  getTasksData(arg) {
+    return this.tasks.map((x) => x.getInfo(arg));
   }
 
   getPendingTasks() {
@@ -20,10 +28,6 @@ export class Todo {
     return this.tasks.filter((x) => x.getState());
   }
 
-  getTaskCount() {
-    return this.tasks.length;
-  }
-
   addNewTask(task) {
     this.tasks.push(task);
   }
@@ -32,14 +36,17 @@ export class Todo {
     this.tasks = this.tasks.filter((x) => x !== task);
   }
 
-  clearAll() {
+  deleteAll() {
     this.tasks = [];
   }
 }
+
 export class Task {
   constructor(name) {
     this.name = name;
+    this.category = '';
     this.state = false;
+    this.age = new Date();
   }
 
   setDueDate(date) {
@@ -62,12 +69,7 @@ export class Task {
     return this;
   }
 
-  getState() {
-    return this.state;
-  }
-
-  getTaskData() {
-    const { name, dueDate, dueTime, urgency, state } = this;
-    return { name, dueDate, dueTime, urgency, state };
+  getInfo(arg) {
+    return this[arg];
   }
 }

@@ -5,20 +5,18 @@ import {
   format,
 } from 'date-fns';
 
-const getCurrentDate = () => new Date();
-
 export const getFormattedDate = (date) => format(date, 'dd/MM/yy');
 
-export const getItemAge = (current, item) => {
+export const getItemAge = (current, toCompare) => {
   const age = {
-    min: differenceInMinutes(current, item),
-    hour: differenceInHours(current, item),
-    day: differenceInDays(current, item),
+    min: differenceInMinutes(current, toCompare),
+    hour: differenceInHours(current, toCompare),
+    day: differenceInDays(current, toCompare),
   };
   return age;
 };
 
-const getRelativeTime = (age) => {
+export const getRelativeTime = (age) => {
   const checkPlural = (value) => (value === 1 ? '' : 's');
   const getTimeString = (value, unit) =>
     `${value} ${unit}${checkPlural(value)} ago`;
@@ -33,9 +31,3 @@ const getRelativeTime = (age) => {
 
   return getTimeString(value, unit);
 };
-
-const currentTime = getCurrentDate();
-const item = new Date('2023-07-01T10:30:00');
-const age = getItemAge(currentTime, item);
-
-console.log(getRelativeTime(age));

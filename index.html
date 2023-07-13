@@ -11,7 +11,9 @@
       id="terminal"
       class="absolute backdrop-blur-lg bg-blend-multiply inset-0 center bg-term-bg bg-opacity-90"
     >
-      <main class="w-[97vw] h-[95vh] rounded-lg border-2 border-accent p-4">
+      <main
+        class="w-[92vw] h-[90vh] rounded-lg border-2 border-accent window-glow p-4"
+      >
         <header>
           <pre id="title" class="text-white font-bold">
   __________     ________    ____   ____  ____ 
@@ -25,11 +27,20 @@
         </header>
 
         <!-- PROMPT -->
-        <section>
-          <h3 class="text-white m-2">[greeed@archGreeed ~]$</h3>
+        <section class="flex" autofocus>
+          <h3 class="text-white m-2">
+            <span id="username" class="font-bold bold text-accent">greeed</span
+            >@<span id="host" class="">archGreed</span>~
+          </h3>
+          <input
+            type="text"
+            id="input-prompt"
+            class="bg-transparent w-full text-white outline-none appearance-none shadow-none caret-accent"
+            placeholder="command..."
+          />
         </section>
       </main>
-      <script type="module" src="src/js/main.js"></script>
+      <script type="module" src="src/js/index.js"></script>
     </div>
   </body>
 </html>

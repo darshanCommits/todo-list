@@ -1,3 +1,5 @@
+import * as time from './time';
+
 export class Todo {
   constructor(category) {
     this.category = category;
@@ -47,6 +49,8 @@ export class Task {
     this.category = '';
     this.state = false;
     this.age = new Date();
+    this.dueDate = null;
+    this.dueTime = null;
   }
 
   setDueDate(date) {
@@ -72,4 +76,30 @@ export class Task {
   getInfo(arg) {
     return this[arg];
   }
+
+  getDueDate() {
+    return this.dueDate ? time.getFormattedDate(this.dueDate) : '';
+  }
+
+  getRelativeDueTime() {
+    const currentDateTime = new Date();
+    if (this.dueDate && this.dueTime) {
+      const dueDateTime = combineDateAndTime(this.dueDate, this.dueTime);
+      const taskAge = time.getItemAge(currentDateTime, dueDateTime);
+      return time.getRelativeTime(taskAge);
+    }
+    return '';
+  }
 }
+
+const combineDateAndTime = (date, time) => {
+  const [hours, minutes] = time.split(':');
+  const combinedDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    hours,
+    minutes,
+  );
+  return combinedDate;
+};

@@ -9,9 +9,9 @@ export const getFormattedDate = (date) => format(date, 'dd/MM/yy');
 
 export const getItemAge = (current, toCompare) => {
   const age = {
-    min: differenceInMinutes(current, toCompare),
-    hour: differenceInHours(current, toCompare),
-    day: differenceInDays(current, toCompare),
+    min: differenceInMinutes(toCompare, current),
+    hour: differenceInHours(toCompare, current),
+    day: differenceInDays(toCompare, current),
   };
   return age;
 };
@@ -19,7 +19,7 @@ export const getItemAge = (current, toCompare) => {
 export const getRelativeTime = (age) => {
   const checkPlural = (value) => (value === 1 ? '' : 's');
   const getTimeString = (value, unit) =>
-    `${value} ${unit}${checkPlural(value)} ago`;
+    `${value} ${unit}${checkPlural(value)} left`;
 
   const timeInfo = [
     { check: age.min < 60, value: age.min, unit: 'minute' },
